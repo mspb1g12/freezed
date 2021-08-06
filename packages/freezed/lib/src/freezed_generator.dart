@@ -250,8 +250,9 @@ Read here: https://github.com/rrousselGit/freezed/tree/master/packages/freezed#t
               await Property.fromParameter(parameter, buildStep),
           ],
           decorators: constructor.metadata
+              .where((e) =>
+                  !e.isImplements && !e.isWith && !e.isAssert && !e.isExtends)
               .map((e) => e.toSource())
-              .where((e) => !e.startsWith('@Assert('))
               .toList(),
           withDecorators: _withDecorationTypes(constructor).toSet().toList(),
           implementsDecorators:
@@ -301,17 +302,15 @@ Read here: https://github.com/rrousselGit/freezed/tree/master/packages/freezed#t
     for (final metadata in constructor.metadata) {
       if (!metadata.isWith) continue;
       final object = metadata.computeConstantValue()!;
-      var type = object.getField('type')!;
-      if (type.isNull) {
-        type = object.getField('stringType')!;
-        yield type.toStringValue()!;
-      } else {
-        yield resolveFullTypeStringFrom(
-          constructor.library,
-          type.toTypeValue()!,
-          withNullability: false,
-        );
-      }
+
+      final genericAnnotationType =
+          (object.type! as InterfaceType).typeArguments.single;
+
+      yield resolveFullTypeStringFrom(
+        constructor.library,
+        genericAnnotationType,
+        withNullability: false,
+      );
     }
   }
 
@@ -321,17 +320,15 @@ Read here: https://github.com/rrousselGit/freezed/tree/master/packages/freezed#t
     for (final metadata in constructor.metadata) {
       if (!metadata.isImplements) continue;
       final object = metadata.computeConstantValue()!;
-      var type = object.getField('type')!;
-      if (type.isNull) {
-        type = object.getField('stringType')!;
-        yield type.toStringValue()!;
-      } else {
-        yield resolveFullTypeStringFrom(
-          constructor.library,
-          type.toTypeValue()!,
-          withNullability: false,
-        );
-      }
+
+      final genericAnnotationType =
+          (object.type! as InterfaceType).typeArguments.single;
+
+      yield resolveFullTypeStringFrom(
+        constructor.library,
+        genericAnnotationType,
+        withNullability: false,
+      );
     }
   }
 

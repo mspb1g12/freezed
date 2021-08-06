@@ -19,15 +19,25 @@ extension FreezedElementAnnotation on ElementAnnotation {
         .isExactlyType(computeConstantValue()!.type!);
   }
 
-  /// if the element is decorated with `@With(Type)` or
-  /// `@With.fromString('Type')`
+  /// if the element is decorated with `@With()`
   bool get isWith {
     return const TypeChecker.fromRuntime(With)
         .isExactlyType(computeConstantValue()!.type!);
   }
 
-  /// if the element is decorated with `@Implements(Type)` or
-  /// `@Implements.fromString('Type')`
+  /// if the element is decorated with `@Assert`
+  bool get isAssert {
+    return const TypeChecker.fromRuntime(Assert)
+        .isExactlyType(computeConstantValue()!.type!);
+  }
+
+  /// if the element is decorated with `@Extends`
+  bool get isExtends {
+    return const TypeChecker.fromRuntime(Extends)
+        .isExactlyType(computeConstantValue()!.type!);
+  }
+
+  /// if the element is decorated with `@Implements()`
   bool get isImplements {
     return const TypeChecker.fromRuntime(Implements)
         .isExactlyType(computeConstantValue()!.type!);

@@ -6,7 +6,7 @@ version: 0.14.4
 homepage: https://github.com/rrousselGit/freezed
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: ">=2.14.0-0.0.dev <3.0.0"
 
 dependencies:
   analyzer: ^2.0.0
@@ -25,3 +25,7 @@ dev_dependencies:
   test: ^1.16.8
   matcher: ^0.12.10
   source_gen_test: ^1.0.0
+
+dependency_overrides:
+  freezed_annotation:
+    path: ../freezed_annotation
