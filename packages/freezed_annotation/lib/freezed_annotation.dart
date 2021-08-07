@@ -164,6 +164,7 @@ class Assert {
   final String? message;
 }
 
+/// {@template freezed_annotation.default}
 /// Allows passing default values to a constructor:
 ///
 /// ```dart
@@ -179,12 +180,15 @@ class Assert {
 ///   factory Example(@JsonKey(defaultValue: 42) int value = 42) = _Example;
 /// }
 /// ```
+/// {@endtemplate}
 class Default {
+  /// {@macro freezed_annotation.default}
   const Default(this.defaultValue);
 
   final Object? defaultValue;
 }
 
+/// {@template freezed_annotation.implements}
 /// Marks a union type to implement a type.
 ///
 /// ```dart
@@ -204,24 +208,14 @@ class Default {
 /// constructor of the union type. Keep in mind that if the mixin defines a
 /// method or a getter, that you implement in the class, you need to use the
 /// [Custom getters and methods](#custom-getters-and-methods) instructions.
+/// {@endtemplate}
 class Implements<T> {
+  /// {@template freezed_annotation.implements}
   const Implements();
 }
 
+/// {@template freezed_annotation.extends}
 /// Allows a Freezed class to extend another class.
-///
-/// ```dart
-/// @freezed
-/// abstract class Example with _$Example {
-///   @Extends<BaseClass>()
-///   const factory Example(String param) = _Example;
-/// }
-/// ```
-///
-/// By default, Freezed calls the default constructor with no argument.
-///
-/// If you want to use a custom super constructor, it is possible to optionally
-/// specify the super constructor to the annotation:
 ///
 /// ```dart
 /// @freezed
@@ -237,15 +231,16 @@ class Implements<T> {
 /// constructor of the union type. Keep in mind that if the mixin defines a
 /// method or a getter, that you implement in the class, you need to use the
 /// [Custom getters and methods](#custom-getters-and-methods) instructions.
+/// {@endtemplate}
 class Extends<T> {
-  const Extends([this.superCtor]);
+  /// {@macro freezed_annotation.extends}
+  const Extends(this.superCtor);
 
   /// The super constructor to use.
-  ///
-  /// Defaults to `super()`.
-  final String? superCtor;
+  final String superCtor;
 }
 
+/// {@template freezed_annotation.wuth}
 /// Marks a union type to mixin the class [type] or [stringType].
 /// In the case below `City` will mixin with `GeographicArea`.
 /// ```dart
@@ -278,10 +273,13 @@ class Extends<T> {
 /// constructor of the union type. Keep in mind that if the mixin defines a
 /// method or a getter, that you implement in the class, you need to use the
 /// [Custom getters and methods](#custom-getters-and-methods) instructions.
+/// {@endtemplate}
 class With<T> {
+  /// {@macro freezed_annotation.with}
   const With();
 }
 
+/// {@template freezed_annotation.freezedunionvalue}
 /// An annotation used to specify how a union type will be serialized.
 ///
 /// By default, Freezed generates the value based on the name of the
@@ -315,7 +313,9 @@ class With<T> {
 ///   }
 /// ]
 /// ```
+/// {@endtemplate}
 class FreezedUnionValue {
+  /// {@template freezed_annotation.freezedunionvalue}
   const FreezedUnionValue(this.value);
 
   final String value;

@@ -18,3 +18,35 @@ String resolveFullTypeStringFrom(
 
   return type.getDisplayString(withNullability: withNullability);
 }
+
+/// Builder for "extends Foo with Bar implements Baz", supporting separators
+/// and optionality.
+String buildInheritance({
+  String? baseClass,
+  List<String>? mixins,
+  List<String>? interfaces,
+}) {
+  final builder = StringBuffer();
+
+  if (baseClass != null) {
+    builder
+      ..write('extends ')
+      ..write(baseClass)
+      ..write(' ');
+  }
+
+  if (mixins != null && mixins.isNotEmpty) {
+    builder
+      ..write('with ')
+      ..writeAll(mixins, ',')
+      ..write(' ');
+  }
+  if (interfaces != null && interfaces.isNotEmpty) {
+    builder
+      ..write('implements ')
+      ..writeAll(interfaces, ',')
+      ..write(' ');
+  }
+
+  return builder.toString();
+}

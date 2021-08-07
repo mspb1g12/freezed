@@ -1,4 +1,6 @@
+import 'package:collection/src/iterable_extensions.dart';
 import 'package:freezed/src/models.dart';
+import 'package:freezed/src/tools/type.dart';
 
 import 'copy_with.dart';
 import 'parameter_template.dart';
@@ -28,7 +30,7 @@ class Abstract {
   String toString() {
     return '''
 /// @nodoc
-mixin _\$$name$genericsDefinition {
+mixin _\$$name$genericsDefinition $_super {
 
 ${abstractProperties.join()}
 
@@ -46,6 +48,21 @@ ${copyWith.interface}
 
 ${copyWith.commonContreteImpl(abstractProperties)}
 ''';
+  }
+
+  String get _super {
+    final superDetails = allConstructors
+        .firstWhereOrNull((c) => c.superDetails != null)
+        ?.superDetails;
+
+    if (superDetails == null ||
+        allConstructors.any((c) => c.superDetails?.type != superDetails.type)) {
+      return '';
+    }
+
+    return buildInheritance(
+      interfaces: [superDetails.type],
+    );
   }
 
   String get _toJson {

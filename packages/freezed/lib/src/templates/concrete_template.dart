@@ -127,8 +127,13 @@ ${copyWith.abstractCopyWithGetter}
   }
 
   String get _superConstructor {
-    if (!shouldUseExtends) return '';
-    return 'super._()';
+    if (shouldUseExtends) return 'super._()';
+
+    if (constructor.superDetails != null) {
+      return constructor.superDetails!.call;
+    }
+
+    return '';
   }
 
   String get _privateConcreteConstructor {
@@ -142,17 +147,27 @@ ${copyWith.abstractCopyWithGetter}
   }
 
   String get _concreteSuper {
+    assert(!shouldUseExtends || constructor.superDetails == null);
+
     final mixins = [
       if (hasDiagnosticable && !hasCustomToString) 'DiagnosticableTreeMixin',
       ...constructor.withDecorators,
     ];
-    final mixinsStr = mixins.isEmpty ? '' : ' with ${mixins.join(',')}';
 
+    final interfaces = [
+      if (!shouldUseExtends) '${constructor.redirectedName}$genericsParameter',
+    ];
+
+    var baseClass = constructor.superDetails?.type;
     if (shouldUseExtends) {
-      return 'extends ${constructor.redirectedName}$genericsParameter $mixinsStr';
-    } else {
-      return '$mixinsStr implements ${constructor.redirectedName}$genericsParameter';
+      baseClass = '${constructor.redirectedName}$genericsParameter';
     }
+
+    return buildInheritance(
+      baseClass: baseClass,
+      mixins: mixins,
+      interfaces: interfaces,
+    );
   }
 
   String get _properties {

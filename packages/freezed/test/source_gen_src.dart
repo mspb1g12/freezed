@@ -22,6 +22,48 @@ class _Properties implements Properties {
   final int regularProperty = 0;
 }
 
+class Base {}
+
+@ShouldThrow(
+  '@Extends can only be used at most once per constructor',
+)
+@freezed
+class MultipleExtends {
+  @Extends<Base>('super()')
+  @Extends<Base>('super()')
+  factory MultipleExtends() = _MultipleExtends;
+}
+
+class _MultipleExtends implements MultipleExtends {
+  _MultipleExtends();
+}
+
+@ShouldThrow(
+  '@Extends cannot be used in combination with a MyClass._() constructor',
+)
+@freezed
+class ExtendsAndMethods {
+  @Extends<Base>('super()')
+  factory ExtendsAndMethods() = _ExtendsAndMethods;
+}
+
+class _ExtendsAndMethods implements ExtendsAndMethods {
+  _ExtendsAndMethods();
+}
+
+@ShouldThrow(
+  "@Extends's super expression must start with either 'super(' or 'super.'",
+)
+@freezed
+class InvalidSuper {
+  @Extends<Base>('superbol')
+  factory InvalidSuper() = _InvalidSuper;
+}
+
+class _InvalidSuper implements InvalidSuper {
+  _InvalidSuper();
+}
+
 @ShouldThrow(
   'The parameter `a` of `RequiredNamed.foo` is non-nullable but is neither required nor marked with @Default',
 )
@@ -209,23 +251,4 @@ class Mixed1 implements Mixed {
 
 class Mixed0 implements Mixed {
   Mixed0(String a);
-}
-
-@ShouldGenerate(
-  '',
-  contains: true,
-  expectedLogItems: [
-    '''
-The class AstractClass was declared as abstract, but it is not need anymore.
-Read here: https://github.com/rrousselGit/freezed/tree/master/packages/freezed#the-abstract-keyword
-''',
-  ],
-)
-@freezed
-abstract class AstractClass {
-  const factory AstractClass() = _AstractClass;
-}
-
-class _AstractClass implements AstractClass {
-  const _AstractClass();
 }

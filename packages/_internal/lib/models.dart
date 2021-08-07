@@ -20,12 +20,20 @@ class Element {}
 
 String constructorNameToCallbackName(String name) => name;
 
+@freezed
+class Super with _$Super {
+  factory Super({
+    required String type,
+    required String call,
+  }) = _Super;
+}
+
 /// A generated property that has for type a class generated using Freezed
 ///
 /// This allows Freezed to support deep copy of the object.
 /// This does include primitives like [int] and [List].
 @freezed
-abstract class CloneableProperty with _$CloneableProperty {
+class CloneableProperty with _$CloneableProperty {
   factory CloneableProperty({
     required String name,
     required String typeName,
@@ -39,11 +47,12 @@ abstract class CloneableProperty with _$CloneableProperty {
 ///
 /// This only includes constructors where Freezed needs to generate something.
 @freezed
-abstract class ConstructorDetails with _$ConstructorDetails {
+class ConstructorDetails with _$ConstructorDetails {
   factory ConstructorDetails({
     required String name,
     required String unionValue,
     required bool isConst,
+    required Super? superDetails,
     required String redirectedName,
     required ParametersTemplate parameters,
     required List<Property> impliedProperties,
@@ -64,7 +73,7 @@ abstract class ConstructorDetails with _$ConstructorDetails {
 }
 
 @freezed
-abstract class Data with _$Data {
+class Data with _$Data {
   @Assert('constructors.isNotEmpty')
   factory Data({
     required String name,
@@ -80,7 +89,7 @@ abstract class Data with _$Data {
 }
 
 @freezed
-abstract class GlobalData with _$GlobalData {
+class GlobalData with _$GlobalData {
   factory GlobalData({
     required bool hasJson,
     required bool hasDiagnostics,

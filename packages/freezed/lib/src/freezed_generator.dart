@@ -47,7 +47,6 @@ class FreezedGenerator extends ParserGenerator<GlobalData, Data, Freezed> {
 
     final configs = _parseConfig(element);
 
-    _assertValidClassUsage(element);
     for (final field in element.fields) {
       _assertValidFieldUsage(field, shouldUseExtends: shouldUseExtends);
     }
@@ -99,18 +98,6 @@ class FreezedGenerator extends ParserGenerator<GlobalData, Data, Freezed> {
           hasJsonKey: false,
         ),
     ];
-  }
-
-  void _assertValidClassUsage(ClassElement element) {
-    // TODO: verify _$name is mixed-in
-    if (element.isAbstract) {
-      log.warning(
-        '''
-The class ${element.name} was declared as abstract, but it is not need anymore.
-Read here: https://github.com/rrousselGit/freezed/tree/master/packages/freezed#the-abstract-keyword
-''',
-      );
-    }
   }
 
   void _assertValidNormalConstructorUsage(
@@ -249,6 +236,7 @@ Read here: https://github.com/rrousselGit/freezed/tree/master/packages/freezed#t
             for (final parameter in constructor.parameters)
               await Property.fromParameter(parameter, buildStep),
           ],
+          superDetails: _decodeExtendsAnnotation(constructor),
           decorators: constructor.metadata
               .where((e) =>
                   !e.isImplements && !e.isWith && !e.isAssert && !e.isExtends)
@@ -296,6 +284,30 @@ Read here: https://github.com/rrousselGit/freezed/tree/master/packages/freezed#t
     }
 
     return result;
+  }
+
+  Super? _decodeExtendsAnnotation(ConstructorElement constructor) {
+    final extendsAnnotation =
+        constructor.metadata.firstWhereOrNull((meta) => meta.isExtends);
+
+    if (extendsAnnotation == null) return null;
+
+    final object = extendsAnnotation.computeConstantValue()!;
+
+    final genericAnnotationType =
+        (object.type! as InterfaceType).typeArguments.single;
+    final superType = resolveFullTypeStringFrom(
+      constructor.library,
+      genericAnnotationType,
+      withNullability: false,
+    );
+
+    final superCall = object.getField('superCtor')!.toStringValue()!;
+
+    return Super(
+      call: superCall,
+      type: superType,
+    );
   }
 
   Iterable<String> _withDecorationTypes(ConstructorElement constructor) sync* {

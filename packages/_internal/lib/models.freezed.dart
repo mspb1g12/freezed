@@ -13,6 +13,147 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
+class _$SuperTearOff {
+  const _$SuperTearOff();
+
+  _Super call({required String type, required String call}) {
+    return _Super(
+      type: type,
+      call: call,
+    );
+  }
+}
+
+/// @nodoc
+const $Super = _$SuperTearOff();
+
+/// @nodoc
+mixin _$Super {
+  String get type => throw _privateConstructorUsedError;
+  String get call => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $SuperCopyWith<Super> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SuperCopyWith<$Res> {
+  factory $SuperCopyWith(Super value, $Res Function(Super) then) =
+      _$SuperCopyWithImpl<$Res>;
+  $Res call({String type, String call});
+}
+
+/// @nodoc
+class _$SuperCopyWithImpl<$Res> implements $SuperCopyWith<$Res> {
+  _$SuperCopyWithImpl(this._value, this._then);
+
+  final Super _value;
+  // ignore: unused_field
+  final $Res Function(Super) _then;
+
+  @override
+  $Res call({
+    Object? type = freezed,
+    Object? call = freezed,
+  }) {
+    return _then(_value.copyWith(
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      call: call == freezed
+          ? _value.call
+          : call // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$SuperCopyWith<$Res> implements $SuperCopyWith<$Res> {
+  factory _$SuperCopyWith(_Super value, $Res Function(_Super) then) =
+      __$SuperCopyWithImpl<$Res>;
+  @override
+  $Res call({String type, String call});
+}
+
+/// @nodoc
+class __$SuperCopyWithImpl<$Res> extends _$SuperCopyWithImpl<$Res>
+    implements _$SuperCopyWith<$Res> {
+  __$SuperCopyWithImpl(_Super _value, $Res Function(_Super) _then)
+      : super(_value, (v) => _then(v as _Super));
+
+  @override
+  _Super get _value => super._value as _Super;
+
+  @override
+  $Res call({
+    Object? type = freezed,
+    Object? call = freezed,
+  }) {
+    return _then(_Super(
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      call: call == freezed
+          ? _value.call
+          : call // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_Super implements _Super {
+  _$_Super({required this.type, required this.call});
+
+  @override
+  final String type;
+  @override
+  final String call;
+
+  @override
+  String toString() {
+    return 'Super(type: $type, call: $call)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _Super &&
+            (identical(other.type, type) ||
+                const DeepCollectionEquality().equals(other.type, type)) &&
+            (identical(other.call, call) ||
+                const DeepCollectionEquality().equals(other.call, call)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(type) ^
+      const DeepCollectionEquality().hash(call);
+
+  @JsonKey(ignore: true)
+  @override
+  _$SuperCopyWith<_Super> get copyWith =>
+      __$SuperCopyWithImpl<_Super>(this, _$identity);
+}
+
+abstract class _Super implements Super {
+  factory _Super({required String type, required String call}) = _$_Super;
+
+  @override
+  String get type => throw _privateConstructorUsedError;
+  @override
+  String get call => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$SuperCopyWith<_Super> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 class _$CloneablePropertyTearOff {
   const _$CloneablePropertyTearOff();
 
@@ -257,6 +398,7 @@ class _$ConstructorDetailsTearOff {
       {required String name,
       required String unionValue,
       required bool isConst,
+      required Super? superDetails,
       required String redirectedName,
       required ParametersTemplate parameters,
       required List<Property> impliedProperties,
@@ -273,6 +415,7 @@ class _$ConstructorDetailsTearOff {
       name: name,
       unionValue: unionValue,
       isConst: isConst,
+      superDetails: superDetails,
       redirectedName: redirectedName,
       parameters: parameters,
       impliedProperties: impliedProperties,
@@ -297,6 +440,7 @@ mixin _$ConstructorDetails {
   String get name => throw _privateConstructorUsedError;
   String get unionValue => throw _privateConstructorUsedError;
   bool get isConst => throw _privateConstructorUsedError;
+  Super? get superDetails => throw _privateConstructorUsedError;
   String get redirectedName => throw _privateConstructorUsedError;
   ParametersTemplate get parameters => throw _privateConstructorUsedError;
   List<Property> get impliedProperties => throw _privateConstructorUsedError;
@@ -325,6 +469,7 @@ abstract class $ConstructorDetailsCopyWith<$Res> {
       {String name,
       String unionValue,
       bool isConst,
+      Super? superDetails,
       String redirectedName,
       ParametersTemplate parameters,
       List<Property> impliedProperties,
@@ -337,6 +482,8 @@ abstract class $ConstructorDetailsCopyWith<$Res> {
       List<String> decorators,
       List<CloneableProperty> cloneableProperties,
       List<AssertTemplate> asserts});
+
+  $SuperCopyWith<$Res>? get superDetails;
 }
 
 /// @nodoc
@@ -353,6 +500,7 @@ class _$ConstructorDetailsCopyWithImpl<$Res>
     Object? name = freezed,
     Object? unionValue = freezed,
     Object? isConst = freezed,
+    Object? superDetails = freezed,
     Object? redirectedName = freezed,
     Object? parameters = freezed,
     Object? impliedProperties = freezed,
@@ -379,6 +527,10 @@ class _$ConstructorDetailsCopyWithImpl<$Res>
           ? _value.isConst
           : isConst // ignore: cast_nullable_to_non_nullable
               as bool,
+      superDetails: superDetails == freezed
+          ? _value.superDetails
+          : superDetails // ignore: cast_nullable_to_non_nullable
+              as Super?,
       redirectedName: redirectedName == freezed
           ? _value.redirectedName
           : redirectedName // ignore: cast_nullable_to_non_nullable
@@ -429,6 +581,17 @@ class _$ConstructorDetailsCopyWithImpl<$Res>
               as List<AssertTemplate>,
     ));
   }
+
+  @override
+  $SuperCopyWith<$Res>? get superDetails {
+    if (_value.superDetails == null) {
+      return null;
+    }
+
+    return $SuperCopyWith<$Res>(_value.superDetails!, (value) {
+      return _then(_value.copyWith(superDetails: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -442,6 +605,7 @@ abstract class _$ConstructorDetailsCopyWith<$Res>
       {String name,
       String unionValue,
       bool isConst,
+      Super? superDetails,
       String redirectedName,
       ParametersTemplate parameters,
       List<Property> impliedProperties,
@@ -454,6 +618,9 @@ abstract class _$ConstructorDetailsCopyWith<$Res>
       List<String> decorators,
       List<CloneableProperty> cloneableProperties,
       List<AssertTemplate> asserts});
+
+  @override
+  $SuperCopyWith<$Res>? get superDetails;
 }
 
 /// @nodoc
@@ -472,6 +639,7 @@ class __$ConstructorDetailsCopyWithImpl<$Res>
     Object? name = freezed,
     Object? unionValue = freezed,
     Object? isConst = freezed,
+    Object? superDetails = freezed,
     Object? redirectedName = freezed,
     Object? parameters = freezed,
     Object? impliedProperties = freezed,
@@ -498,6 +666,10 @@ class __$ConstructorDetailsCopyWithImpl<$Res>
           ? _value.isConst
           : isConst // ignore: cast_nullable_to_non_nullable
               as bool,
+      superDetails: superDetails == freezed
+          ? _value.superDetails
+          : superDetails // ignore: cast_nullable_to_non_nullable
+              as Super?,
       redirectedName: redirectedName == freezed
           ? _value.redirectedName
           : redirectedName // ignore: cast_nullable_to_non_nullable
@@ -557,6 +729,7 @@ class _$_ConstructorDetails extends _ConstructorDetails {
       {required this.name,
       required this.unionValue,
       required this.isConst,
+      required this.superDetails,
       required this.redirectedName,
       required this.parameters,
       required this.impliedProperties,
@@ -577,6 +750,8 @@ class _$_ConstructorDetails extends _ConstructorDetails {
   final String unionValue;
   @override
   final bool isConst;
+  @override
+  final Super? superDetails;
   @override
   final String redirectedName;
   @override
@@ -604,7 +779,7 @@ class _$_ConstructorDetails extends _ConstructorDetails {
 
   @override
   String toString() {
-    return 'ConstructorDetails(name: $name, unionValue: $unionValue, isConst: $isConst, redirectedName: $redirectedName, parameters: $parameters, impliedProperties: $impliedProperties, isDefault: $isDefault, isFallback: $isFallback, hasJsonSerializable: $hasJsonSerializable, fullName: $fullName, withDecorators: $withDecorators, implementsDecorators: $implementsDecorators, decorators: $decorators, cloneableProperties: $cloneableProperties, asserts: $asserts)';
+    return 'ConstructorDetails(name: $name, unionValue: $unionValue, isConst: $isConst, superDetails: $superDetails, redirectedName: $redirectedName, parameters: $parameters, impliedProperties: $impliedProperties, isDefault: $isDefault, isFallback: $isFallback, hasJsonSerializable: $hasJsonSerializable, fullName: $fullName, withDecorators: $withDecorators, implementsDecorators: $implementsDecorators, decorators: $decorators, cloneableProperties: $cloneableProperties, asserts: $asserts)';
   }
 
   @override
@@ -619,6 +794,9 @@ class _$_ConstructorDetails extends _ConstructorDetails {
             (identical(other.isConst, isConst) ||
                 const DeepCollectionEquality()
                     .equals(other.isConst, isConst)) &&
+            (identical(other.superDetails, superDetails) ||
+                const DeepCollectionEquality()
+                    .equals(other.superDetails, superDetails)) &&
             (identical(other.redirectedName, redirectedName) ||
                 const DeepCollectionEquality()
                     .equals(other.redirectedName, redirectedName)) &&
@@ -662,6 +840,7 @@ class _$_ConstructorDetails extends _ConstructorDetails {
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(unionValue) ^
       const DeepCollectionEquality().hash(isConst) ^
+      const DeepCollectionEquality().hash(superDetails) ^
       const DeepCollectionEquality().hash(redirectedName) ^
       const DeepCollectionEquality().hash(parameters) ^
       const DeepCollectionEquality().hash(impliedProperties) ^
@@ -686,6 +865,7 @@ abstract class _ConstructorDetails extends ConstructorDetails {
       {required String name,
       required String unionValue,
       required bool isConst,
+      required Super? superDetails,
       required String redirectedName,
       required ParametersTemplate parameters,
       required List<Property> impliedProperties,
@@ -706,6 +886,8 @@ abstract class _ConstructorDetails extends ConstructorDetails {
   String get unionValue => throw _privateConstructorUsedError;
   @override
   bool get isConst => throw _privateConstructorUsedError;
+  @override
+  Super? get superDetails => throw _privateConstructorUsedError;
   @override
   String get redirectedName => throw _privateConstructorUsedError;
   @override
