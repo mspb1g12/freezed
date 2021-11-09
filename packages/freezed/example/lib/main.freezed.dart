@@ -313,8 +313,10 @@ class _$DataCopyWithImpl<$Res> extends _$UnionCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$Data with DiagnosticableTreeMixin implements Data {
-  const _$Data(this.value, {String? $type}) : $type = $type ?? 'Default';
+class _$Data extends Data with DiagnosticableTreeMixin {
+  const _$Data(this.value, {String? $type})
+      : $type = $type ?? 'Default',
+        super._();
 
   factory _$Data.fromJson(Map<String, dynamic> json) => _$$DataFromJson(json);
 
@@ -433,8 +435,9 @@ class _$Data with DiagnosticableTreeMixin implements Data {
   }
 }
 
-abstract class Data implements Union {
+abstract class Data extends Union {
   const factory Data(int value) = _$Data;
+  const Data._() : super._();
 
   factory Data.fromJson(Map<String, dynamic> json) = _$Data.fromJson;
 
@@ -461,8 +464,10 @@ class _$LoadingCopyWithImpl<$Res> extends _$UnionCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$Loading with DiagnosticableTreeMixin implements Loading {
-  const _$Loading({String? $type}) : $type = $type ?? 'Loading';
+class _$Loading extends Loading with DiagnosticableTreeMixin {
+  const _$Loading({String? $type})
+      : $type = $type ?? 'Loading',
+        super._();
 
   factory _$Loading.fromJson(Map<String, dynamic> json) =>
       _$$LoadingFromJson(json);
@@ -570,8 +575,9 @@ class _$Loading with DiagnosticableTreeMixin implements Loading {
   }
 }
 
-abstract class Loading implements Union {
+abstract class Loading extends Union {
   const factory Loading() = _$Loading;
+  const Loading._() : super._();
 
   factory Loading.fromJson(Map<String, dynamic> json) = _$Loading.fromJson;
 }
@@ -609,9 +615,10 @@ class _$ErrorDetailsCopyWithImpl<$Res> extends _$UnionCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ErrorDetails with DiagnosticableTreeMixin implements ErrorDetails {
+class _$ErrorDetails extends ErrorDetails with DiagnosticableTreeMixin {
   const _$ErrorDetails([this.message, String? $type])
-      : $type = $type ?? 'Error';
+      : $type = $type ?? 'Error',
+        super._();
 
   factory _$ErrorDetails.fromJson(Map<String, dynamic> json) =>
       _$$ErrorDetailsFromJson(json);
@@ -731,8 +738,9 @@ class _$ErrorDetails with DiagnosticableTreeMixin implements ErrorDetails {
   }
 }
 
-abstract class ErrorDetails implements Union {
+abstract class ErrorDetails extends Union {
   const factory ErrorDetails([String? message]) = _$ErrorDetails;
+  const ErrorDetails._() : super._();
 
   factory ErrorDetails.fromJson(Map<String, dynamic> json) =
       _$ErrorDetails.fromJson;
@@ -779,8 +787,10 @@ class _$ComplexCopyWithImpl<$Res> extends _$UnionCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$Complex with DiagnosticableTreeMixin implements Complex {
-  const _$Complex(this.a, this.b, {String? $type}) : $type = $type ?? 'Complex';
+class _$Complex extends Complex with DiagnosticableTreeMixin {
+  const _$Complex(this.a, this.b, {String? $type})
+      : $type = $type ?? 'Complex',
+        super._();
 
   factory _$Complex.fromJson(Map<String, dynamic> json) =>
       _$$ComplexFromJson(json);
@@ -904,8 +914,9 @@ class _$Complex with DiagnosticableTreeMixin implements Complex {
   }
 }
 
-abstract class Complex implements Union {
+abstract class Complex extends Union {
   const factory Complex(int a, String b) = _$Complex;
+  const Complex._() : super._();
 
   factory Complex.fromJson(Map<String, dynamic> json) = _$Complex.fromJson;
 
